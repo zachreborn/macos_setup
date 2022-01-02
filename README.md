@@ -5,6 +5,16 @@ This respository is for setting up a new Macbook with various settings I've grow
 - Terminal: fish
 - brew
 - VS Code
-- - Git Graph
-
-- 
+    - Alignment
+    - Docker
+    - Git Graph
+    - GitLense
+    - GitHub Pull Request and Issues
+    - HashiCorp Terraform
+- Github Desktop
+- AWS CLI
+- pyenv
+- pipenv
+- python
+- terraform
+- Dropbox
