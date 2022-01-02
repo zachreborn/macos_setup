@@ -18,3 +18,4 @@ This respository is for setting up a new Macbook with various settings I've grow
 - python
 - terraform
 - Dropbox
+- Magnet
