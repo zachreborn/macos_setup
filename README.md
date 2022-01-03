@@ -23,11 +23,20 @@ This respository is for setting up a new Macbook with various settings I've grow
 - Magnet
 - Nerd Fonts
 
-# AWS CLI
+# Initial Set Up
+    ```
+    brew install awscli hyper python terraform
+    ```
+# Installations
+## AWS CLI
+    ```
     brew install awscli
+    ```
 
-# Nerd Fonts
+## Nerd Fonts
     https://www.nerdfonts.com/font-downloads
 
-# Hyper
+## Hyper
+    ```
     brew install hyper
+    ```
