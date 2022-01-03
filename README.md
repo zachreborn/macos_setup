@@ -19,3 +19,11 @@ This respository is for setting up a new Macbook with various settings I've grow
 - terraform
 - Dropbox
 - Magnet
+- Nerd Fonts
+
+
+
+# Nerd Fonts
+    https://www.nerdfonts.com/font-downloads
+
+    
