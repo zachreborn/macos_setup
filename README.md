@@ -3,6 +3,8 @@ This respository is for setting up a new Macbook with various settings I've grow
 
 # List of applications
 - Terminal: fish
+- Oh-My-Posh
+- Hyper
 - brew
 - VS Code
     - Alignment
@@ -26,4 +28,3 @@ This respository is for setting up a new Macbook with various settings I've grow
 # Nerd Fonts
     https://www.nerdfonts.com/font-downloads
 
-    
