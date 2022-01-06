@@ -26,7 +26,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 # Initial Set Up
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install awscli hyper python terraform
+brew install fish awscli hyper python terraform
 ```
 # Installations
 ## Homebrew
