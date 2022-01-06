@@ -5,7 +5,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 - fish
 - Oh-My-Posh
 - Hyper
-- brew
+- Homebrew
 - VS Code
     - Alignment
     - Docker
@@ -28,9 +28,20 @@ This respository is for setting up a new Macbook with various settings I've grow
     brew install awscli hyper python terraform
     ```
 # Installations
-
+## Homebrew
+    ```
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
 ## fish
+    ```
     brew install fish
+    ```
+
+## Oh-My-Posh
+    ```
+    brew tap jandedobbeleer/oh-my-posh
+    brew install oh-my-posh
+    ```
 ## AWS CLI
     ```
     brew install awscli
