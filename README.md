@@ -24,9 +24,9 @@ This respository is for setting up a new Macbook with various settings I've grow
 - Nerd Fonts
 
 # Initial Set Up
-    ```bash
-    brew install awscli hyper python terraform
-    ```
+```bash
+brew install awscli hyper python terraform
+```
 # Installations
 ## Homebrew
     ```
