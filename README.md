@@ -30,28 +30,32 @@ brew install fish awscli hyper python terraform
 ```
 # Installations
 ## Homebrew
-    ```
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 ## fish
-    ```
-    brew install fish
-    ```
+```bash
+brew install fish
+```
 
 ## Oh-My-Posh
-    ```
-    brew tap jandedobbeleer/oh-my-posh
-    brew install oh-my-posh
-    ```
+```bash
+brew tap jandedobbeleer/oh-my-posh
+brew install oh-my-posh
+```
 ## AWS CLI
-    ```
-    brew install awscli
-    ```
+```bash
+brew install awscli
+```
 
 ## Nerd Fonts
-    https://www.nerdfonts.com/font-downloads
+https://www.nerdfonts.com/font-downloads
+```bash
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+```
 
 ## Hyper
-    ```
-    brew install hyper
-    ```
+```bash
+brew install hyper
+```
