@@ -62,3 +62,20 @@ https://hyper.is/
 brew install hyper
 hyper install hyper-material-theme
 ```
+
+## Terraform
+```bash
+brew install terraform
+```
+
+## pyenv
+https://hackernoon.com/reaching-python-development-nirvana-bb5692adf30c
+```bash
+brew install pyenv
+```
+
+## pipenv
+https://hackernoon.com/reaching-python-development-nirvana-bb5692adf30c
+```bash
+brew install pipenv
+```
