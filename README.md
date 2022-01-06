@@ -34,6 +34,7 @@ brew install fish awscli hyper python terraform
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 ## fish
+https://fishshell.com/
 ```bash
 brew install fish
 ```
@@ -56,6 +57,8 @@ brew install --cask font-hack-nerd-font
 ```
 
 ## Hyper
+https://hyper.is/
 ```bash
 brew install hyper
+hyper install hyper-material-theme
 ```
