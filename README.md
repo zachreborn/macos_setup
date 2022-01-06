@@ -2,7 +2,7 @@
 This respository is for setting up a new Macbook with various settings I've grown to like.
 
 # List of applications
-- Terminal: fish
+- fish
 - Oh-My-Posh
 - Hyper
 - brew
@@ -28,6 +28,9 @@ This respository is for setting up a new Macbook with various settings I've grow
     brew install awscli hyper python terraform
     ```
 # Installations
+
+## fish
+    brew install fish
 ## AWS CLI
     ```
     brew install awscli
