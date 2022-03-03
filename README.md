@@ -22,6 +22,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 - Dropbox
 - Magnet
 - Nerd Fonts
+- ykman
 
 # Initial Set Up
 ```bash
@@ -78,4 +79,9 @@ brew install pyenv
 https://hackernoon.com/reaching-python-development-nirvana-bb5692adf30c
 ```bash
 brew install pipenv
+```
+
+## ykman
+```bash
+brew install ykman
 ```
