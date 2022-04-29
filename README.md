@@ -2,6 +2,7 @@
 This respository is for setting up a new Macbook with various settings I've grown to like.
 
 # List of applications
+- Magnet
 - fish
 - Oh-My-Posh
 - Hyper
@@ -34,6 +35,9 @@ brew install fish awscli hyper python terraform
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+## Magnet
+https://apps.apple.com/us/app/magnet/id441258766?mt=12
 ## fish
 https://fishshell.com/
 ```bash
