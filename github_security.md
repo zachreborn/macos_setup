@@ -32,6 +32,7 @@ The following tools are utilized
 brew install gnupg pinentry-mac
 ```
 
+## GPG Set Up and Key Generation
 ```bash
 gpg --card-edit
 admin
