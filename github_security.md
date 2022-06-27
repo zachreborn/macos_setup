@@ -38,3 +38,7 @@ admin
 passwd
 generate
 ```
+
+
+## Troubleshooting code signing failure
+https://gist.github.com/Peredery/38d0538dd34381bbd9d13414269a1f27
