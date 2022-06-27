@@ -5,7 +5,7 @@ The following is a guide to setting up security on a new device with GitHub
 
 
 ```bash
-ssh-keygen -a 100 -t ed25519-sk -b 512 -C zhill@thinkstack.co -O resident
+ssh-keygen -a 100 -t ed25519-sk -b 521 -C zhill@thinkstack.co -O resident
 ```
 ## Command flag information:
 
@@ -16,3 +16,15 @@ ssh-keygen -a 100 -t ed25519-sk -b 512 -C zhill@thinkstack.co -O resident
 -O 
 
 # GPG
+Yubikey guide and walkthrough: https://developers.yubico.com/PGP/PGP_Walk-Through.html
+
+```bash
+brew install gnupg
+gpg --card-edit
+```
+
+```bash
+admin
+passwd
+
+```
