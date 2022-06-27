@@ -18,8 +18,7 @@ ssh-keygen -a 100 -t ed25519-sk -b 521 -C zhill@thinkstack.co -O resident
 # GPG
 Yubikey guide and walkthrough: https://developers.yubico.com/PGP/PGP_Walk-Through.html
 
-This configuration guide sets up GPG to be utilized with a Yubikey and Github. The guide performs the following:
-1. Installs the necessary components
+This configuration guide sets up GPG to be utilized with a Yubikey and Github.
 
 ## Installation
 The following tools are utilized
