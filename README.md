@@ -63,6 +63,8 @@ https://apps.apple.com/us/app/magnet/id441258766?mt=12
 https://fishshell.com/
 ```bash
 brew install fish
+sudo bash -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
+chsh -s /opt/homebrew/bin/fish
 ```
 
 ## Oh-My-Posh
