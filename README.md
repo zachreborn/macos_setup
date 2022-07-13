@@ -2,6 +2,7 @@
 This respository is for setting up a new Macbook with various settings I've grown to like.
 
 # List of applications
+- Brew
 - Google Chrome
 - Magnet
 - fish
@@ -29,7 +30,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 # Initial Set Up
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install fish awscli hyper python terraform
+brew install fish awscli hyper python terraform pyenv pipenv ykman
 ```
 # Installations
 ## Homebrew
