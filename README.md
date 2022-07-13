@@ -72,6 +72,7 @@ chsh -s /opt/homebrew/bin/fish
 ```bash
 brew tap jandedobbeleer/oh-my-posh
 brew install oh-my-posh
+oh-my-posh init fish --config ~/.poshthemes/octo.theme.json | source
 ```
 
 ## AWS CLI
@@ -113,4 +114,14 @@ brew install pipenv
 ## ykman
 ```bash
 brew install ykman
+```
+
+## glances
+```bash
+brew install glances
+```
+
+## htop
+```bash
+brew install htop
 ```
