@@ -2,6 +2,7 @@
 This respository is for setting up a new Macbook with various settings I've grown to like.
 
 # List of applications
+- Google Chrome
 - Magnet
 - fish
 - Oh-My-Posh
@@ -36,6 +37,26 @@ brew install fish awscli hyper python terraform
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+## Google Chrome
+```bash
+brew install --cask google-chrome
+```
+
+## Github Desktop
+```bash
+brew install --cask github
+```
+
+## Amazon Workspaces
+```bash
+brew install --cask amazon-workspaces
+```
+
+## VS Code
+```bash
+brew install --cask visual-studio-code
+```
+
 ## Magnet
 https://apps.apple.com/us/app/magnet/id441258766?mt=12
 ## fish
@@ -49,6 +70,7 @@ brew install fish
 brew tap jandedobbeleer/oh-my-posh
 brew install oh-my-posh
 ```
+
 ## AWS CLI
 ```bash
 brew install awscli
