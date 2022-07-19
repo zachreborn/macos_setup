@@ -22,6 +22,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 - pipenv
 - python
 - terraform
+- terraform-docs
 - Dropbox
 - Magnet
 - Nerd Fonts
@@ -97,6 +98,11 @@ hyper install hyper-material-theme
 ## Terraform
 ```bash
 brew install terraform
+```
+
+## Terraform-docs
+```bash
+brew install terraform-docs
 ```
 
 ## pyenv
