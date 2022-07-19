@@ -105,6 +105,11 @@ brew install terraform
 brew install terraform-docs
 ```
 
+### Terraform-docs Usage
+```bash
+terraform-docs markdown table --output-file ./README.md .
+```
+
 ## pyenv
 https://hackernoon.com/reaching-python-development-nirvana-bb5692adf30c
 ```bash
