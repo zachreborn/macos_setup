@@ -136,3 +136,13 @@ brew install glances
 ```bash
 brew install htop
 ```
+
+## Discord
+```bash
+brew install --cask discord
+```
+
+## Steam
+```bash
+brew install --cask steam
+```
