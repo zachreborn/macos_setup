@@ -8,6 +8,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 - fish
 - Oh-My-Posh
 - Hyper
+- warp
 - Homebrew
 - VS Code
     - Alignment
@@ -27,6 +28,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 - Magnet
 - Nerd Fonts
 - ykman
+
 
 # Initial Set Up
 ```bash
@@ -93,6 +95,12 @@ https://hyper.is/
 ```bash
 brew install hyper
 hyper install hyper-material-theme
+```
+
+## Warp
+https://www.warp.dev/
+```bash
+brew install --cask warp
 ```
 
 ## Terraform
