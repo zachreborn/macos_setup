@@ -101,7 +101,7 @@ hyper install hyper-material-theme
 https://www.warp.dev/
 ```bash
 brew install --cask warp
-mkdir ~/.warp/themes
+mkdir -p ~/.warp/themes
 cd ~/.warp/themes
 curl -O "https://raw.githubusercontent.com/zachreborn/warp_theme_hyper_material/main/hyper_material.yaml"
 ```
