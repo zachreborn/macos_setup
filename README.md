@@ -32,11 +32,15 @@ This respository is for setting up a new Macbook with various settings I've grow
 
 # Initial Set Up
 The installations of applications utilizes Homebrew as the package manager for MacOS. It is best practice to use a package manager for easier installation and keeping your applications up to date.
+1. Install Homebrew
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
+```
+2. Configure automatic updates for Homebrew
+```bash
 brew autoupdate start --upgrade --cleanup --enable-notification
 ```
+
 # Installations
 ## Homebrew
 ```bash
