@@ -173,6 +173,14 @@ brew install glances
 brew install --cask discord
 ```
 
+## Dropbox
+1. Install Dropbox
+```bash
+brew install --cask dropbox
+```
+2. Sign in to Dropbox
+3. Configure synchronization settings
+
 ## Steam
 ```bash
 brew install --cask steam
