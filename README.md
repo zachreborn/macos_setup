@@ -75,7 +75,11 @@ chsh -s /opt/homebrew/bin/fish
 ```bash
 brew tap jandedobbeleer/oh-my-posh
 brew install oh-my-posh
-oh-my-posh init fish --config ~/.poshthemes/octo.theme.json | source
+mkdir ~/.poshthemes
+cd ~/.poshthemes
+curl -O "https://raw.githubusercontent.com/zachreborn/macos_setup/main/.poshthemes/octo-theme.omp.json"
+oh-my-posh init fish --config ~/.poshthemes/octo-theme.omp.json | source
+cd ~
 ```
 
 ## AWS CLI
@@ -104,7 +108,9 @@ brew install --cask warp
 mkdir -p ~/.warp/themes
 cd ~/.warp/themes
 curl -O "https://raw.githubusercontent.com/zachreborn/warp_theme_hyper_material/main/hyper_material.yaml"
+cd ~
 ```
+After installing, open Warp and go to Settings > Themes > Import Theme and select the hyper_material.yaml file.
 
 ## Terraform
 ```bash
