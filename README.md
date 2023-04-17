@@ -28,6 +28,8 @@ This respository is for setting up a new Macbook with various settings I've grow
 - Magnet
 - Nerd Fonts
 - ykman
+- gpg
+- pinentry-mac
 
 
 # Initial Set Up
@@ -161,6 +163,16 @@ brew install pipenv
 ## ykman
 ```bash
 brew install ykman
+```
+
+## gpg
+```bash
+brew install gpg
+```
+
+## pinentry-mac
+```bash
+brew install pinentry-mac
 ```
 
 ## glances
