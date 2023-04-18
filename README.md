@@ -88,6 +88,10 @@ chsh -s /opt/homebrew/bin/fish
 fish_add_path /opt/homebrew/bin
 fish_update_completions
 ```
+3. Set up fish to run oh-my-posh and have all functions
+```bash
+cp -R ~/code/macos_setup/.config/fish/* ~/.config/fish/
+```
 
 ## Oh-My-Posh
 1. Install Oh-My-Posh
