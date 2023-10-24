@@ -42,3 +42,7 @@ generate
 
 ## Troubleshooting code signing failure
 https://gist.github.com/Peredery/38d0538dd34381bbd9d13414269a1f27
+
+## Additional information
+https://github.com/YubicoLabs/sign-git-commits-yubikey
+https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
