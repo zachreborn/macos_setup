@@ -17,7 +17,8 @@ This respository is for setting up a new Macbook with various settings I've grow
     - GitHub Pull Request and Issues
     - GitHub Copilot
     - HashiCorp Terraform
-- Github Desktop
+- GitHub Desktop
+- GitHub CLI
 - AWS CLI
 - pyenv
 - pipenv
@@ -30,6 +31,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 - ykman
 - gpg
 - pinentry-mac
+- obsidian
 
 
 # Initial Set Up
@@ -114,6 +116,11 @@ brew install --cask github
 ```
 2. Run GitHub Desktop
 3. Login to GitHub
+
+## GitHub CLI
+```bash
+brew install gh
+```
 
 ## Amazon Workspaces
 ```bash
@@ -202,6 +209,10 @@ brew install --cask dropbox
 brew install --cask steam
 ```
 
+## Obsidian
+```bash
+brew install --cask obsidian
+```
 
 # Older Configurations
 ## Hyper
