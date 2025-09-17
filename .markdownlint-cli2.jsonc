@@ -1,9 +1,9 @@
 {
   // Markdownlint configuration for macOS setup repository
   "config": {
-    // Line length - allow longer lines for code blocks and links
+    // Line length - allow longer lines for code blocks, links, and descriptive text
     "MD013": {
-      "line_length": 120,
+      "line_length": 200,
       "code_blocks": false,
       "tables": false
     },
@@ -32,7 +32,11 @@
     // Allow emphasis as headings (common in troubleshooting sections)
     "MD036": false,
     // Allow blank lines around fences (flexible for readability)
-    "MD031": false
+    "MD031": false,
+    // Allow multiple consecutive blank lines (for visual separation)
+    "MD012": false,
+    // Allow both ATX and setext heading styles  
+    "MD003": false
   },
   // Ignore certain files
   "ignores": [
