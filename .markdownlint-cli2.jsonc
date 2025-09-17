@@ -1,0 +1,26 @@
+{
+  // Markdownlint configuration for macOS setup repository
+  "config": {
+    // Line length - allow longer lines for code blocks and links
+    "MD013": {
+      "line_length": 120,
+      "code_blocks": false,
+      "tables": false
+    },
+    // Allow duplicate headings (common in README with multiple "Installation" sections)
+    "MD024": false,
+    // Allow HTML tags (useful for badges and formatting)
+    "MD033": false,
+    // Allow bare URLs (useful for quick links)
+    "MD034": false,
+    // Allow trailing punctuation in headings
+    "MD026": false,
+    // Allow ordered list item prefix (1. vs 1))
+    "MD029": false
+  },
+  // Ignore certain files
+  "ignores": [
+    "node_modules/**/*.md",
+    ".git/**/*.md"
+  ]
+}
