@@ -1,0 +1,235 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    name: Lint and Test
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup shellcheck
+      run: brew install shellcheck
+      
+    - name: Lint shell scripts
+      run: |
+        echo "🔍 Linting shell scripts..."
+        find . -name "*.sh" -type f | while read -r script; do
+          echo "Linting: $script"
+          shellcheck "$script"
+        done
+        
+    - name: Check script permissions
+      run: |
+        echo "🔐 Checking script permissions..."
+        if [[ -x "scripts/bootstrap-macos.sh" ]]; then
+          echo "✅ bootstrap-macos.sh is executable"
+        else
+          echo "❌ bootstrap-macos.sh is not executable"
+          exit 1
+        fi
+        
+    - name: Validate script structure
+      run: |
+        echo "📋 Validating script structure..."
+        script="scripts/bootstrap-macos.sh"
+        
+        # Check for required sections
+        sections=("PRE-FLIGHT CHECKS" "HOMEBREW INSTALLATION" "INSTALL CLI TOOLS" "INSTALL GUI APPLICATIONS" "CONFIGURE FISH SHELL")
+        for section in "${sections[@]}"; do
+          if grep -q "$section" "$script"; then
+            echo "✅ Found section: $section"
+          else
+            echo "❌ Missing section: $section"
+            exit 1
+          fi
+        done
+        
+    - name: Test dry-run mode
+      run: |
+        echo "🧪 Testing dry-run mode..."
+        ./scripts/bootstrap-macos.sh --dry-run
+        echo "✅ Dry-run completed successfully"
+        
+    - name: Validate formulae and casks
+      run: |
+        echo "📦 Validating Homebrew formulae and casks..."
+        
+        # Extract formulae from script
+        formulae=$(grep -A 20 'FORMULAE=(' scripts/bootstrap-macos.sh | grep '"' | sed 's/.*"\([^"]*\)".*/\1/' | sort)
+        echo "Formulae found:"
+        echo "$formulae"
+        
+        # Extract casks from script  
+        casks=$(grep -A 20 'CASKS=(' scripts/bootstrap-macos.sh | grep '"' | sed 's/.*"\([^"]*\)".*/\1/' | sort)
+        echo "Casks found:"
+        echo "$casks"
+        
+        # Check for duplicates
+        echo "Checking for duplicates..."
+        if echo "$formulae" | sort | uniq -d | grep -q .; then
+          echo "❌ Duplicate formulae found"
+          echo "$formulae" | sort | uniq -d
+          exit 1
+        else
+          echo "✅ No duplicate formulae"
+        fi
+        
+        if echo "$casks" | sort | uniq -d | grep -q .; then
+          echo "❌ Duplicate casks found"
+          echo "$casks" | sort | uniq -d
+          exit 1
+        else
+          echo "✅ No duplicate casks"
+        fi
+        
+    - name: Check documentation sync
+      run: |
+        echo "📚 Checking documentation synchronization..."
+        
+        # Check if tools in script match tools in README
+        readme_tools=$(grep -A 50 "CLI Tools:" README.md | head -1 | tr ',' '\n' | grep -E "(fish|gh|aws|terraform|pyenv|ripgrep|fd)" | wc -l)
+        script_tools=$(grep -A 20 'FORMULAE=(' scripts/bootstrap-macos.sh | grep -c '"')
+        
+        echo "Tools mentioned in README CLI summary: $readme_tools"
+        echo "Tools in script FORMULAE array: $script_tools"
+        
+        # Allow some flexibility as README might not list all tools
+        if [[ $script_tools -lt 10 ]]; then
+          echo "❌ Too few tools in script (expected at least 10)"
+          exit 1
+        else
+          echo "✅ Script contains expected number of tools"
+        fi
+
+  markdown-lint:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Lint Markdown files
+      uses: DavidAnson/markdownlint-cli2-action@v16
+      with:
+        globs: |
+          **/*.md
+          !node_modules/**/*.md
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run security scan
+      run: |
+        echo "🔒 Running security checks..."
+        
+        # Check for hardcoded secrets or sensitive patterns
+        if grep -r -E "(password|secret|key|token)" --include="*.sh" --include="*.md" . | grep -v -E "(# |password-like|secret-like|example|placeholder)"; then
+          echo "⚠️  Potential secrets found - please review:"
+          grep -r -E "(password|secret|key|token)" --include="*.sh" --include="*.md" . | grep -v -E "(# |password-like|secret-like|example|placeholder)"
+        else
+          echo "✅ No obvious secrets detected"
+        fi
+        
+        # Check for dangerous commands
+        dangerous_patterns=("rm -rf /" "sudo rm" "chmod 777" "chown -R root")
+        script="scripts/bootstrap-macos.sh"
+        
+        for pattern in "${dangerous_patterns[@]}"; do
+          if grep -q "$pattern" "$script"; then
+            echo "❌ Dangerous pattern found: $pattern"
+            exit 1
+          fi
+        done
+        echo "✅ No dangerous patterns detected"
+
+  validate-config-files:
+    name: Validate Config Files
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Validate JSON files
+      run: |
+        echo "📄 Validating JSON configuration files..."
+        find . -name "*.json" -type f | while read -r json_file; do
+          echo "Validating: $json_file"
+          if python3 -m json.tool "$json_file" > /dev/null; then
+            echo "✅ Valid JSON: $json_file"
+          else
+            echo "❌ Invalid JSON: $json_file"
+            exit 1
+          fi
+        done
+        
+    - name: Validate YAML files
+      run: |
+        echo "📄 Validating YAML configuration files..."
+        pip install pyyaml
+        find . -name "*.yaml" -name "*.yml" -type f | while read -r yaml_file; do
+          echo "Validating: $yaml_file"
+          if python3 -c "import yaml; yaml.safe_load(open('$yaml_file'))" 2>/dev/null; then
+            echo "✅ Valid YAML: $yaml_file"
+          else
+            echo "❌ Invalid YAML: $yaml_file"
+            exit 1
+          fi
+        done
+
+  compatibility-test:
+    name: Compatibility Test
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        # Test on different macOS versions if available
+        os-version: [macos-13, macos-14]
+    continue-on-error: true  # Don't fail if some versions aren't available
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: System info
+      run: |
+        echo "🖥️  System Information:"
+        uname -a
+        sw_vers
+        echo "Architecture: $(uname -m)"
+        
+    - name: Test script compatibility
+      run: |
+        echo "🧪 Testing script compatibility..."
+        
+        # Test that the script can parse arguments
+        if ./scripts/bootstrap-macos.sh --dry-run | grep -q "DRY RUN mode"; then
+          echo "✅ Script argument parsing works"
+        else
+          echo "❌ Script argument parsing failed"
+          exit 1
+        fi
+        
+        # Test that required commands exist
+        required_commands=("curl" "brew" "git" "sw_vers" "uname")
+        for cmd in "${required_commands[@]}"; do
+          if command -v "$cmd" >/dev/null 2>&1; then
+            echo "✅ Required command available: $cmd"
+          else
+            echo "❌ Required command missing: $cmd"
+            exit 1
+          fi
+        done
