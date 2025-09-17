@@ -38,8 +38,56 @@ This respository is for setting up a new Macbook with various settings I've grow
 - glances
 - Discord
 - Soundsource
+- fd
+- ripgrep
 
-# Initial Set Up
+# Automated Installation
+
+**The easiest way to set up your macOS environment is with the automated bootstrap script:**
+
+```bash
+# Clone this repository and run the bootstrap script
+git clone https://github.com/zachreborn/macos_setup.git
+cd macos_setup
+./scripts/bootstrap-macos.sh
+```
+
+**Features of the bootstrap script:**
+- ✅ **Idempotent** - Safe to run multiple times
+- ✅ **Comprehensive** - Installs everything listed below automatically
+- ✅ **Smart** - Detects and handles Apple Silicon vs Intel Macs
+- ✅ **Safe** - Includes dry-run mode and robust error handling
+- ✅ **Configures** - Sets up shell, themes, and environment variables
+
+**Options:**
+```bash
+# Preview what will be installed without making changes
+./scripts/bootstrap-macos.sh --dry-run
+
+# Normal installation
+./scripts/bootstrap-macos.sh
+```
+
+**Prerequisites:**
+- macOS 11+ (Big Sur or later)
+- Admin access (sudo will be requested when needed)
+- Internet connection
+
+**What gets installed:**
+- **Homebrew** package manager with auto-updates
+- **CLI Tools:** fish, oh-my-posh, gh, aws, terraform, pyenv, pipenv, ykman, gpg, docker, fd, ripgrep, glances
+- **GUI Apps:** Google Chrome, Warp, VS Code, GitHub Desktop, Discord, Dropbox, Steam, Obsidian, Docker Desktop, SoundSource, Amazon WorkSpaces  
+- **Fonts:** Hack Nerd Font for terminal icons
+- **Shell:** fish configured as default with Oh-My-Posh theme
+- **Configurations:** GPG, pyenv, custom Warp theme, fish environment
+
+---
+
+# Manual Installation
+
+If you prefer to install things manually or want to understand what the bootstrap script does, here are the individual steps:
+
+## Initial Set Up
 
 The installations of applications utilizes Homebrew as the package manager for MacOS. It is best practice to use a package manager for easier installation and keeping your applications up to date.
 
@@ -283,6 +331,36 @@ brew install docker
 
 ```bash
 brew install --cask soundsource
+```
+
+## fd
+fd is a much better version of `find` for MacOS. It's more intuitive command structure is excellent and quite a bit faster at actually finding files.
+
+```bash
+brew install fd
+```
+
+## ripgrep
+ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern. It's significantly faster than grep and has better default behavior for developers.
+
+```bash
+brew install ripgrep
+```
+
+### ripgrep Usage Examples
+
+```bash
+# Basic search
+rg "search term"
+
+# Search in specific file types
+rg "function" --type js
+
+# Case insensitive search
+rg -i "TODO"
+
+# Search with line numbers
+rg -n "import"
 ```
 
 ---
