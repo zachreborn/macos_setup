@@ -7,8 +7,14 @@
       "code_blocks": false,
       "tables": false
     },
+    // Allow multiple H1 headings (GitHub issue templates have YAML front matter + content H1)
+    "MD025": false,
     // Allow duplicate headings (common in README with multiple "Installation" sections)
     "MD024": false,
+    // Relax blank line requirements around headings for templates
+    "MD022": false,
+    // Allow lists without surrounding blank lines (common in templates)
+    "MD032": false,
     // Allow HTML tags (useful for badges and formatting)
     "MD033": false,
     // Allow bare URLs (useful for quick links)
@@ -16,7 +22,17 @@
     // Allow trailing punctuation in headings
     "MD026": false,
     // Allow ordered list item prefix (1. vs 1))
-    "MD029": false
+    "MD029": false,
+    // Allow code blocks without language specification (templates often have generic blocks)
+    "MD040": false,
+    // Allow files without trailing newlines (templates may not need them)
+    "MD047": false,
+    // Allow trailing spaces (useful for line breaks in templates)
+    "MD009": false,
+    // Allow emphasis as headings (common in troubleshooting sections)
+    "MD036": false,
+    // Allow blank lines around fences (flexible for readability)
+    "MD031": false
   },
   // Ignore certain files
   "ignores": [
