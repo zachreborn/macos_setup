@@ -5,7 +5,7 @@ The following is a guide to setting up security on a new device with GitHub
 
 
 ```bash
-ssh-keygen -a 100 -t ed25519-sk -b 521 -C zhill@thinkstack.co -O resident
+ssh-keygen -a 100 -t ed25519-sk -b 521 -C your_name@example.org -O resident
 ```
 ## Command flag information:
 
