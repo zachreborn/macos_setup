@@ -175,11 +175,13 @@ else
   touch ~/.zprofile ~/.bash_profile 2>/dev/null || true
   
   if ! grep -q 'brew shellenv' ~/.zprofile 2>/dev/null; then
-    echo "eval "$($(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv 2>/dev/null))"" >> ~/.zprofile
+    # shellcheck disable=SC2016
+    echo 'eval "$($(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv 2>/dev/null))"' >> ~/.zprofile
   fi
   
   if ! grep -q 'brew shellenv' ~/.bash_profile 2>/dev/null; then
-    echo "eval "$($(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv 2>/dev/null))"" >> ~/.bash_profile
+    # shellcheck disable=SC2016
+    echo 'eval "$($(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv 2>/dev/null))"' >> ~/.bash_profile
   fi
   
   ok "Homebrew environment persisted in shell profiles"
