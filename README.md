@@ -40,6 +40,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 - Soundsource
 - fd
 - ripgrep
+- lsd
 
 # Automated Installation
 
@@ -75,7 +76,7 @@ cd macos_setup
 
 **What gets installed:**
 - **Homebrew** package manager with auto-updates
-- **CLI Tools:** fish, oh-my-posh, gh, aws, terraform, pyenv, pipenv, ykman, gpg, docker, fd, ripgrep, glances
+- **CLI Tools:** fish, oh-my-posh, gh, aws, terraform, pyenv, pipenv, ykman, gpg, docker, fd, ripgrep, lsd, glances
 - **GUI Apps:** Google Chrome, Warp, VS Code, GitHub Desktop, Discord, Dropbox, Steam, Obsidian, Docker Desktop, SoundSource, Amazon WorkSpaces  
 - **Fonts:** Hack Nerd Font for terminal icons
 - **Shell:** fish configured as default with Oh-My-Posh theme
@@ -361,6 +362,35 @@ rg -i "TODO"
 
 # Search with line numbers
 rg -n "import"
+```
+
+## lsd
+lsd is a modern replacement for `ls` with better defaults, colors, and icon support. It provides a more user-friendly directory listing experience.
+
+```bash
+brew install lsd
+```
+
+### lsd Usage Examples
+
+```bash
+# Basic listing (equivalent to ls -la)
+lsd
+
+# List with file sizes in human readable format
+lsd -lh
+
+# Tree view of directory structure
+lsd --tree
+
+# Show only directories
+lsd -d */
+
+# Sort by file size
+lsd -lS
+
+# Sort by modification time
+lsd -lt
 ```
 
 ---
