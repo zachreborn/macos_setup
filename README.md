@@ -6,6 +6,7 @@ This respository is for setting up a new Macbook with various settings I've grow
 
 - AWS CLI
 - bitwarden-cli
+- Bitwarden (desktop app)
 - Discord
 - Dropbox
 - Google Chrome
@@ -271,6 +272,14 @@ bw sync
 
 # Lock your vault
 bw lock
+```
+
+## Bitwarden Desktop App
+
+Bitwarden Desktop is the graphical user interface for managing your Bitwarden vault.
+
+```bash
+brew install --cask bitwarden
 ```
 
 ## Terraform

@@ -20,6 +20,7 @@ DRY_RUN=false
 INSTALL_STEAM=false
 INSTALL_WORKSPACES=false
 INSTALL_GITHUB_DESKTOP=false
+INSTALL_BITWARDEN=false
 SHOW_HELP=false
 
 # Parse arguments
@@ -42,10 +43,15 @@ while [[ $# -gt 0 ]]; do
       INSTALL_GITHUB_DESKTOP=true
       shift
       ;;
+    --with-bitwarden)
+      INSTALL_BITWARDEN=true
+      shift
+      ;;
     --include-optional|--all-optional)
       INSTALL_STEAM=true
       INSTALL_WORKSPACES=true
       INSTALL_GITHUB_DESKTOP=true
+      INSTALL_BITWARDEN=true
       shift
       ;;
     --help|-h)
@@ -80,6 +86,7 @@ OPTIONS:
   --with-workspaces          Include Amazon WorkSpaces in the installation
   --with-amazon-workspaces   Alias for --with-workspaces
   --with-github-desktop      Include GitHub Desktop in the installation
+  --with-bitwarden           Include Bitwarden Desktop in the installation
   --include-optional         Include all optional applications
   --all-optional             Alias for --include-optional
   --help, -h                 Show this help message
@@ -88,12 +95,13 @@ EXAMPLES:
   ./scripts/bootstrap-macos.sh                       # Install core apps only
   ./scripts/bootstrap-macos.sh --with-steam          # Install core apps + Steam
   ./scripts/bootstrap-macos.sh --with-github-desktop # Install core apps + GitHub Desktop
+  ./scripts/bootstrap-macos.sh --with-bitwarden      # Install core apps + Bitwarden Desktop
   ./scripts/bootstrap-macos.sh --include-optional    # Install all apps including optionals
   ./scripts/bootstrap-macos.sh --dry-run             # Preview what would be installed
 
 OPTIONAL APPLICATIONS:
   By default, these applications are not installed (use flags to include them):
-  - Steam, Amazon WorkSpaces, GitHub Desktop
+  - Steam, Amazon WorkSpaces, GitHub Desktop, Bitwarden Desktop
 
 CORE APPLICATIONS:
   The following applications are always installed:
@@ -369,6 +377,9 @@ fi
 if [[ "$INSTALL_GITHUB_DESKTOP" == "true" ]]; then
   OPTIONAL_CASKS+=("github")
 fi
+if [[ "$INSTALL_BITWARDEN" == "true" ]]; then
+  OPTIONAL_CASKS+=("bitwarden")
+fi
 
 # Install core applications
 for cask in "${CORE_CASKS[@]}"; do
@@ -382,7 +393,7 @@ if [[ ${#OPTIONAL_CASKS[@]} -gt 0 ]]; then
     ensure_cask "$cask"
   done
 else
-  log "No optional applications selected (use --include-optional or --with-steam/--with-workspaces/--with-github-desktop to install them)"
+  log "No optional applications selected (use --include-optional or --with-steam/--with-workspaces/--with-github-desktop/--with-bitwarden to install them)"
 fi
 
 # =============================================================================
@@ -583,6 +594,9 @@ else
   fi
   if [[ "$INSTALL_STEAM" == "true" ]]; then
     warn "   - Steam"
+  fi
+  if [[ "$INSTALL_BITWARDEN" == "true" ]]; then
+    warn "   - Bitwarden Desktop"
   fi
   warn "   - Discord"
   warn "3. In Warp: Settings → Appearance → Themes → select 'hyper_material'"
