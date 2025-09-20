@@ -197,7 +197,7 @@ jobs:
     strategy:
       matrix:
         # Test on different macOS versions if available
-        os-version: [macos-13, macos-14]
+        os-version: [macos-13, macos-14, macos-15, macos-26]
     continue-on-error: true  # Don't fail if some versions aren't available
     
     steps:
