@@ -5,6 +5,8 @@ This respository is for setting up a new Macbook with various settings I've grow
 # List of applications
 
 - AWS CLI
+- bitwarden-cli
+- Bitwarden (desktop app)
 - Discord
 - Dropbox
 - Google Chrome
@@ -75,7 +77,7 @@ cd macos_setup
 
 **What gets installed:**
 - **Homebrew** package manager with auto-updates
-- **CLI Tools:** fish, oh-my-posh, gh, aws, terraform, pyenv, pipenv, ykman, gpg, docker, fd, ripgrep, lsd, glances
+- **CLI Tools:** fish, oh-my-posh, gh, aws, bitwarden-cli, terraform, pyenv, pipenv, ykman, gpg, docker, fd, ripgrep, lsd, glances
 - **GUI Apps:** Google Chrome, Warp, VS Code, GitHub Desktop, Discord, Dropbox, Steam, Obsidian, Docker Desktop, SoundSource, Amazon WorkSpaces  
 - **Fonts:** Hack Nerd Font for terminal icons
 - **Shell:** fish configured as default with Oh-My-Posh theme
@@ -231,6 +233,53 @@ brew install --cask visual-studio-code
 
 ```bash
 brew install awscli
+```
+
+## Bitwarden CLI
+
+Bitwarden CLI is a command-line interface for accessing and managing your Bitwarden vault.
+
+```bash
+brew install bitwarden-cli
+```
+
+### Bitwarden CLI Usage Examples
+
+```bash
+# Login to your Bitwarden account
+bw login
+
+# Unlock your vault (returns a session key)
+bw unlock
+
+# Set the session environment variable (replace with actual session key)
+export BW_SESSION="your-session-key"
+
+# List all items in your vault
+bw list items
+
+# Search for specific items
+bw list items --search "github"
+
+# Get a specific item by name
+bw get item "GitHub"
+
+# Generate a password
+bw generate --length 16 --uppercase --lowercase --number --special
+
+# Sync your vault
+bw sync
+
+# Lock your vault
+bw lock
+```
+
+## Bitwarden Desktop App
+
+Bitwarden Desktop is the graphical user interface for managing your Bitwarden vault.
+
+```bash
+brew install --cask bitwarden
 ```
 
 ## Terraform
