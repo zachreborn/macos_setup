@@ -67,8 +67,12 @@ jobs:
         echo "Formulae found:"
         echo "$formulae"
         
-        # Extract casks from script  
-        casks=$(grep -A 20 'CASKS=(' scripts/bootstrap-macos.sh | grep '"' | sed 's/.*"\([^"]*\)".*/\1/' | sort)
+        # Extract casks from script (both core and optional)
+        core_casks=$(grep -A 20 'CORE_CASKS=(' scripts/bootstrap-macos.sh | grep '"' | sed 's/.*"\([^"]*\)".*/\1/' | sort)
+        # Also include font casks that are installed directly
+        font_casks=$(grep 'ensure_cask.*font-' scripts/bootstrap-macos.sh | sed 's/.*"\([^"]*\)".*/\1/' | sort)
+        # Combine all casks
+        casks=$(echo -e "$core_casks\n$font_casks" | sort | uniq)
         echo "Casks found:"
         echo "$casks"
         
