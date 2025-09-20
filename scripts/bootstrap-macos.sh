@@ -15,11 +15,86 @@ abort() { err "$*"; exit 1; }
 # Error handling
 trap 'err "Failed at line $LINENO"; exit 1' ERR
 
-# Check for dry run mode
+# Parse command line arguments
 DRY_RUN=false
-if [[ "${1:-}" == "--dry-run" ]]; then
-  DRY_RUN=true
-  log "Running in DRY RUN mode - no changes will be made"
+INSTALL_STEAM=false
+INSTALL_WORKSPACES=false
+SHOW_HELP=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --dry-run|-n)
+      DRY_RUN=true
+      log "Running in DRY RUN mode - no changes will be made"
+      shift
+      ;;
+    --with-steam)
+      INSTALL_STEAM=true
+      shift
+      ;;
+    --with-workspaces|--with-amazon-workspaces)
+      INSTALL_WORKSPACES=true
+      shift
+      ;;
+    --include-optional|--all-optional)
+      INSTALL_STEAM=true
+      INSTALL_WORKSPACES=true
+      shift
+      ;;
+    --help|-h)
+      SHOW_HELP=true
+      shift
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      err "Unknown option: $1"
+      SHOW_HELP=true
+      break
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+# Show help if requested or on error
+if [[ "$SHOW_HELP" == "true" ]]; then
+  cat << 'EOF'
+macOS Bootstrap Script
+
+Usage: ./scripts/bootstrap-macos.sh [OPTIONS]
+
+OPTIONS:
+  --dry-run, -n              Show what would be installed without making changes
+  --with-steam               Include Steam in the installation
+  --with-workspaces          Include Amazon WorkSpaces in the installation
+  --with-amazon-workspaces   Alias for --with-workspaces
+  --include-optional         Include all optional applications (Steam and WorkSpaces)
+  --all-optional             Alias for --include-optional
+  --help, -h                 Show this help message
+
+EXAMPLES:
+  ./scripts/bootstrap-macos.sh                    # Install core apps only
+  ./scripts/bootstrap-macos.sh --with-steam       # Install core apps + Steam
+  ./scripts/bootstrap-macos.sh --include-optional # Install all apps including optionals
+  ./scripts/bootstrap-macos.sh --dry-run          # Preview what would be installed
+
+OPTIONAL APPLICATIONS:
+  By default, Steam and Amazon WorkSpaces are not installed.
+  Use the flags above to include them in your installation.
+
+CORE APPLICATIONS:
+  The following applications are always installed:
+  - Google Chrome, Warp Terminal, Visual Studio Code
+  - GitHub Desktop, Discord, Dropbox, Obsidian
+  - Docker Desktop, SoundSource
+
+EOF
+  exit 0
 fi
 
 # System info
@@ -262,23 +337,42 @@ done
 
 log "Installing GUI applications..."
 
-CASKS=(
+# Core applications (always installed)
+CORE_CASKS=(
   "google-chrome"
   "warp"
   "visual-studio-code"
   "github"
-  "amazon-workspaces"
   "discord"
   "dropbox"
-  "steam"
   "obsidian"
   "docker-desktop"
   "soundsource"
 )
 
-for cask in "${CASKS[@]}"; do
+# Optional applications (only installed if requested)
+OPTIONAL_CASKS=()
+if [[ "$INSTALL_STEAM" == "true" ]]; then
+  OPTIONAL_CASKS+=("steam")
+fi
+if [[ "$INSTALL_WORKSPACES" == "true" ]]; then
+  OPTIONAL_CASKS+=("amazon-workspaces")
+fi
+
+# Install core applications
+for cask in "${CORE_CASKS[@]}"; do
   ensure_cask "$cask"
 done
+
+# Install optional applications if any were selected
+if [[ ${#OPTIONAL_CASKS[@]} -gt 0 ]]; then
+  log "Installing optional applications..."
+  for cask in "${OPTIONAL_CASKS[@]}"; do
+    ensure_cask "$cask"
+  done
+else
+  log "No optional applications selected (use --include-optional or --with-steam/--with-workspaces to install them)"
+fi
 
 # =============================================================================
 # INSTALL FONTS
@@ -471,8 +565,12 @@ else
   warn "2. Sign in to your accounts:"
   warn "   - Dropbox"
   warn "   - GitHub Desktop"
-  warn "   - Amazon WorkSpaces"
-  warn "   - Steam"
+  if [[ "$INSTALL_WORKSPACES" == "true" ]]; then
+    warn "   - Amazon WorkSpaces"
+  fi
+  if [[ "$INSTALL_STEAM" == "true" ]]; then
+    warn "   - Steam"
+  fi
   warn "   - Discord"
   warn "3. In Warp: Settings → Appearance → Themes → select 'hyper_material'"
   warn "4. Restart your terminal or log out/in for shell changes to take effect"
