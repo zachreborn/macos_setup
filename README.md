@@ -4,10 +4,13 @@ This respository is for setting up a new Macbook with various settings I've grow
 
 # List of applications
 
-- Brew
+- AWS CLI
+- Discord
+- Dropbox
 - Google Chrome
-- Magnet
+- fd
 - fish
+- lsd
 - Oh-My-Posh
 - warp
 - Homebrew
@@ -21,26 +24,22 @@ This respository is for setting up a new Macbook with various settings I've grow
   - HashiCorp Terraform
 - GitHub Desktop
 - GitHub CLI
-- AWS CLI
 - pyenv
 - pipenv
 - python
 - terraform
 - terraform-docs
-- Dropbox
 - Magnet
 - Nerd Fonts
 - ykman
 - gpg
 - pinentry-mac
 - obsidian
-- docker
+- docker cli
+- docker desktop
 - glances
-- Discord
-- Soundsource
-- fd
 - ripgrep
-- lsd
+- Soundsource
 
 # Automated Installation
 
