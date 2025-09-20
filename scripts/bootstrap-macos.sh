@@ -187,9 +187,21 @@ else
   ok "Homebrew environment persisted in shell profiles"
 fi
 
+# Remove deprecated taps
+log "Cleaning up deprecated taps..."
+if [[ "$DRY_RUN" == "true" ]]; then
+  log "[DRY RUN] Would remove deprecated homebrew/cask-fonts tap if present"
+else
+  if brew tap | grep -qx "homebrew/cask-fonts"; then
+    log "Removing deprecated homebrew/cask-fonts tap (fonts are now in homebrew/cask)"
+    brew untap homebrew/cask-fonts
+  else
+    ok "Deprecated homebrew/cask-fonts tap not present"
+  fi
+fi
+
 # Add required taps
 log "Adding required Homebrew taps..."
-ensure_tap "homebrew/cask-fonts"
 ensure_tap "jandedobbeleer/oh-my-posh"
 ensure_tap "homebrew/autoupdate"
 
