@@ -321,6 +321,7 @@ FORMULAE=(
   "oh-my-posh"
   "gh"
   "awscli"
+  "bitwarden-cli"
   "terraform"
   "terraform-docs"
   "pyenv"
@@ -550,7 +551,7 @@ if [[ "$DRY_RUN" == "true" ]]; then
 else
   log "Verifying installations..."
   
-  for cmd in brew fish gh aws terraform terraform-docs pyenv pipenv ykman gpg glances docker fd ripgrep lsd oh-my-posh; do
+  for cmd in brew fish gh aws bw terraform terraform-docs pyenv pipenv ykman gpg glances docker fd ripgrep lsd oh-my-posh; do
     if command -v "$cmd" >/dev/null 2>&1; then
       version_info="$("$cmd" --version 2>/dev/null | head -n1 || echo "installed")"
       printf "%-16s %s\n" "$cmd" "$version_info"
