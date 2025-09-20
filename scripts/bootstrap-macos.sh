@@ -19,6 +19,7 @@ trap 'err "Failed at line $LINENO"; exit 1' ERR
 DRY_RUN=false
 INSTALL_STEAM=false
 INSTALL_WORKSPACES=false
+INSTALL_GITHUB_DESKTOP=false
 SHOW_HELP=false
 
 # Parse arguments
@@ -37,9 +38,14 @@ while [[ $# -gt 0 ]]; do
       INSTALL_WORKSPACES=true
       shift
       ;;
+    --with-github-desktop|--with-github)
+      INSTALL_GITHUB_DESKTOP=true
+      shift
+      ;;
     --include-optional|--all-optional)
       INSTALL_STEAM=true
       INSTALL_WORKSPACES=true
+      INSTALL_GITHUB_DESKTOP=true
       shift
       ;;
     --help|-h)
@@ -73,25 +79,27 @@ OPTIONS:
   --with-steam               Include Steam in the installation
   --with-workspaces          Include Amazon WorkSpaces in the installation
   --with-amazon-workspaces   Alias for --with-workspaces
-  --include-optional         Include all optional applications (Steam and WorkSpaces)
+  --with-github-desktop      Include GitHub Desktop in the installation
+  --include-optional         Include all optional applications
   --all-optional             Alias for --include-optional
   --help, -h                 Show this help message
 
 EXAMPLES:
-  ./scripts/bootstrap-macos.sh                    # Install core apps only
-  ./scripts/bootstrap-macos.sh --with-steam       # Install core apps + Steam
-  ./scripts/bootstrap-macos.sh --include-optional # Install all apps including optionals
-  ./scripts/bootstrap-macos.sh --dry-run          # Preview what would be installed
+  ./scripts/bootstrap-macos.sh                       # Install core apps only
+  ./scripts/bootstrap-macos.sh --with-steam          # Install core apps + Steam
+  ./scripts/bootstrap-macos.sh --with-github-desktop # Install core apps + GitHub Desktop
+  ./scripts/bootstrap-macos.sh --include-optional    # Install all apps including optionals
+  ./scripts/bootstrap-macos.sh --dry-run             # Preview what would be installed
 
 OPTIONAL APPLICATIONS:
-  By default, Steam and Amazon WorkSpaces are not installed.
-  Use the flags above to include them in your installation.
+  By default, these applications are not installed (use flags to include them):
+  - Steam, Amazon WorkSpaces, GitHub Desktop
 
 CORE APPLICATIONS:
   The following applications are always installed:
   - Google Chrome, Warp Terminal, Visual Studio Code
-  - GitHub Desktop, Discord, Dropbox, Obsidian
-  - Docker Desktop, SoundSource
+  - Discord, Dropbox, Obsidian, Docker Desktop, SoundSource
+  - GitHub CLI (gh command-line tool)
 
 EOF
   exit 0
@@ -342,7 +350,6 @@ CORE_CASKS=(
   "google-chrome"
   "warp"
   "visual-studio-code"
-  "github"
   "discord"
   "dropbox"
   "obsidian"
@@ -358,6 +365,9 @@ fi
 if [[ "$INSTALL_WORKSPACES" == "true" ]]; then
   OPTIONAL_CASKS+=("amazon-workspaces")
 fi
+if [[ "$INSTALL_GITHUB_DESKTOP" == "true" ]]; then
+  OPTIONAL_CASKS+=("github")
+fi
 
 # Install core applications
 for cask in "${CORE_CASKS[@]}"; do
@@ -371,7 +381,7 @@ if [[ ${#OPTIONAL_CASKS[@]} -gt 0 ]]; then
     ensure_cask "$cask"
   done
 else
-  log "No optional applications selected (use --include-optional or --with-steam/--with-workspaces to install them)"
+  log "No optional applications selected (use --include-optional or --with-steam/--with-workspaces/--with-github-desktop to install them)"
 fi
 
 # =============================================================================
@@ -564,7 +574,9 @@ else
   warn "1. Launch Docker Desktop to complete setup (will request privileged helper)"
   warn "2. Sign in to your accounts:"
   warn "   - Dropbox"
-  warn "   - GitHub Desktop"
+  if [[ "$INSTALL_GITHUB_DESKTOP" == "true" ]]; then
+    warn "   - GitHub Desktop"
+  fi
   if [[ "$INSTALL_WORKSPACES" == "true" ]]; then
     warn "   - Amazon WorkSpaces"
   fi
